@@ -1,10 +1,7 @@
 use("commerce");
-db.produtos.find(
-  // {},
-  // { ultimaModificacao: true }
-);
+db.produtos.find();
 
-// desafio 1
+// desafio 1 $set
 use("commerce");
 db.produtos.updateMany(
   {},
@@ -17,7 +14,7 @@ db.produtos.find(
   { nome: true, criadoPor: true, _id: false },
 );
 
-// desafio 2
+// desafio 2 $set
 use("commerce");
 db.produtos.updateMany(
   {},
@@ -30,7 +27,7 @@ db.produtos.find(
   { nome: true, valorUnitario: true, _id: false },
 );
 
-// desafio 3
+// desafio 3 $set $inc
 use("commerce");
 db.produtos.updateMany(
   {},
@@ -53,7 +50,7 @@ db.produtos.find(
   { nome: true, avaliacao: true, _id: false },
 );
 
-// desafio 4
+// desafio 4 $currentDate
 use("commerce");
 db.produtos.updateOne(
   { nome: "Big Mac" },
@@ -69,3 +66,91 @@ db.produtos.find(
   { ultimaModificacao: { $exists: true } },
   { nome: true, _id: false },
 );
+
+// desafio 5 $addToSet:
+use("commerce");
+db.produtos.updateMany(
+  { nome: { $ne: "McChicken" } },
+  { 
+    $addToSet: {
+      ingredientes: "ketchup",
+    },
+  },
+);
+
+use("commerce");
+db.produtos.find(
+  {},
+  { nome: true, ingredientes: true, _id: false },
+);
+
+// desafio 6 $push
+use("commerce");
+db.produtos.updateMany(
+  { nome: { $in: ["Big Mac", "Quarteirão com Queijo"] } },
+  { 
+    $push: {
+      ingredientes: "bacon",
+    },
+  },
+);
+
+use("commerce");
+db.produtos.find(
+  {},
+  { nome: true, ingredientes: true, _id: false },
+);
+
+// desafio 7 $pull
+use("commerce");
+db.produtos.updateMany(
+  {},
+  { 
+    $pull: {
+      ingredientes: "cebola",
+    },
+  },
+);
+
+use("commerce");
+db.produtos.find(
+  {},
+  { nome: true, ingredientes: true, _id: false },
+);
+
+// desafio 8 $pop
+use("commerce");
+db.produtos.updateOne(
+  { nome: "Quarteirão com Queijo" },
+  { 
+    $pop: {
+      ingredientes: -1,
+    },
+  },
+);
+
+use("commerce");
+db.produtos.find(
+  {},
+  { nome: true, ingredientes: true, _id: false },
+);
+
+// desafio 9 $pop
+use("commerce");
+db.produtos.updateOne(
+  { nome: "Cheddar McMelt" },
+  { 
+    $pop: {
+      ingredientes: 1,
+    },
+  },
+);
+
+use("commerce");
+db.produtos.find(
+  {},
+  { nome: true, ingredientes: true, _id: false },
+);
+
+use("commerce");
+db.produtos.find();
