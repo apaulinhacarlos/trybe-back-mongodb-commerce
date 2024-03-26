@@ -75,7 +75,7 @@ npm install
 
 ## Instruções para testar as queries
 
-ara executar localmente os testes é necessário ter o MongoDB instalado em seguida, é preciso escrever o seguinte comando no seu terminal, estando na raiz do diretório do projeto:
+Para executar localmente os testes é necessário ter o MongoDB instalado em seguida, é preciso escrever o seguinte comando no seu terminal, estando na raiz do diretório do projeto:
 ```sh
 ./scripts/evaluate.sh
 ```
